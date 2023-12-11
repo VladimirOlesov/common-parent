@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.1.4</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>com.example</groupId>
+  <artifactId>common-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <modules>
+    <module>common-code</module>
+  </modules>
+
+  <properties>
+    <java.version>17</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <snakeyml.version>2.2</snakeyml.version>
+    <springdoc-openapi-starter-webmvc-ui>2.2.0</springdoc-openapi-starter-webmvc-ui>
+    <mapstruct>1.5.5.Final</mapstruct>
+    <mapstruct-processor>1.5.5.Final</mapstruct-processor>
+    <lombok-mapstruct-binding>0.2.0</lombok-mapstruct-binding>
+    <flyway-core>9.21.0</flyway-core>
+    <lombok>1.18.30</lombok>
+    <hibernate-jpamodelgen>6.2.7.Final</hibernate-jpamodelgen>
+    <spring-boot-maven-plugin>3.1.4</spring-boot-maven-plugin>
+    <jjwt>0.11.5</jjwt>
+    <docker-compose>3.1.6</docker-compose>
+    <feign-core>12.5</feign-core>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyml.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${springdoc-openapi-starter-webmvc-ui}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-processor</artifactId>
+        <version>${mapstruct-processor}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-docker-compose</artifactId>
+        <version>${docker-compose}</version>
+        <scope>runtime</scope>
+        <optional>true</optional>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>${jjwt}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>${jjwt}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>${jjwt}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-jpamodelgen</artifactId>
+        <version>${hibernate-jpamodelgen}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-core</artifactId>
+        <version>${feign-core}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
