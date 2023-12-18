@@ -3,7 +3,7 @@ package com.example.commoncode.advice;
 import com.example.commoncode.exception.BookCoverException; 
 import com.example.commoncode.exception.BookExportException;
 import com.example.commoncode.exception.DuplicateException;
-
+import com.example.commoncode.exception.OrderProcessingException;
 import com.example.commoncode.model.dto.ErrorResponseDto;
 import com.example.commoncode.model.dto.ValidationErrorDto;
 import feign.FeignException;
@@ -57,6 +57,12 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(FileNotFoundException.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ErrorResponseDto handleFileNotFoundException(FileNotFoundException e) {
+    return new ErrorResponseDto(e.getMessage());
+  }
+
+  @ExceptionHandler(OrderProcessingException.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ErrorResponseDto handleOrderProcessingException(OrderProcessingException e) {
     return new ErrorResponseDto(e.getMessage());
   }
 
