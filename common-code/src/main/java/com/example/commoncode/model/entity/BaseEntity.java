@@ -7,11 +7,18 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.experimental.FieldNameConstants;
 
+/**
+ * Абстрактный базовый класс, представляющий для сущностей идентификатор 'id',
+ * генерируемый автоматически.
+ */
 @Data
 @FieldNameConstants
 @MappedSuperclass
 public abstract class BaseEntity {
 
+  /**
+   * Идентификатор для сущностей.
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

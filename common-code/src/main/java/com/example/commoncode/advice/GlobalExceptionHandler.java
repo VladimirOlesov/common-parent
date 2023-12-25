@@ -1,15 +1,15 @@
 package com.example.commoncode.advice;
 
-import com.example.commoncode.exception.BookCoverException; 
+import com.example.commoncode.exception.BookCoverException;
 import com.example.commoncode.exception.BookExportException;
 import com.example.commoncode.exception.DuplicateException;
-import com.example.commoncode.exception.OrderProcessingException;
 import com.example.commoncode.model.dto.ErrorResponseDto;
 import com.example.commoncode.model.dto.ValidationErrorDto;
 import feign.FeignException;
 import jakarta.persistence.EntityNotFoundException;
 import java.io.FileNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,6 +24,12 @@ public class GlobalExceptionHandler {
     return new ErrorResponseDto(e.getMessage());
   }
 
+  @ExceptionHandler(FeignException.NotFound.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ErrorResponseDto handleFeignNotFound(FeignException.NotFound e) {
+    return new ErrorResponseDto(e.getMessage());
+  }
+
   @ExceptionHandler(DuplicateException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorResponseDto handleDuplicateException(DuplicateException e) {
@@ -33,6 +39,12 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(EntityNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public ErrorResponseDto handleEntityNotFoundException(EntityNotFoundException e) {
+    return new ErrorResponseDto(e.getMessage());
+  }
+
+  @ExceptionHandler(AuthenticationException.class)
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public ErrorResponseDto handleAuthenticationException(AuthenticationException e) {
     return new ErrorResponseDto(e.getMessage());
   }
 
@@ -57,12 +69,6 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(FileNotFoundException.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ErrorResponseDto handleFileNotFoundException(FileNotFoundException e) {
-    return new ErrorResponseDto(e.getMessage());
-  }
-
-  @ExceptionHandler(OrderProcessingException.class)
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  public ErrorResponseDto handleOrderProcessingException(OrderProcessingException e) {
     return new ErrorResponseDto(e.getMessage());
   }
 
