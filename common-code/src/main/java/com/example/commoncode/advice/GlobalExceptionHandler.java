@@ -8,6 +8,7 @@ import com.example.commoncode.model.dto.ValidationErrorDto;
 import feign.FeignException;
 import jakarta.persistence.EntityNotFoundException;
 import java.io.FileNotFoundException;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +18,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+  @ExceptionHandler(OptimisticLockingFailureException.class)
+  @ResponseStatus(HttpStatus.CONFLICT)
+  public ErrorResponseDto handleOptimisticLockingFailureException(
+      OptimisticLockingFailureException e) {
+    return new ErrorResponseDto(e.getMessage());
+  }
 
   @ExceptionHandler(FeignException.BadRequest.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
