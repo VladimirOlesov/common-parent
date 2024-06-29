@@ -1,15 +1,12 @@
 package com.example.commoncode.model.dto;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import lombok.Data;
+import lombok.Builder;
 
-@Data
-public class ValidationErrorDto {
+@Builder
+public record ValidationErrorDto(
+    int code,
+    Map<String, List<String>> message) {
 
-  private final Map<String, String> fieldErrors = new HashMap<>();
-
-  public void addFieldError(String field, String message) {
-    fieldErrors.put(field, message);
-  }
 }
